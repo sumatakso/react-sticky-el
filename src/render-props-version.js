@@ -334,7 +334,7 @@ class Sticky extends Component<RenderProps, State> {
     const { holderRef, wrapperRef } = this;
     const { isFixed, wrapperStyles, holderStyles } = this.state;
 
-    return <StickyStateContext.Provider>
+    return <StickyStateContext.Provider value={{isFixed}}>
       {this.props.children({
         holderRef,
         wrapperRef,
