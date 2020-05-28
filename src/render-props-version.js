@@ -97,7 +97,7 @@ class Sticky extends Component<RenderProps, State> {
 
   disabled: boolean = false;
   checkPositionIntervalId: IntervalID;
-  lastMinHeight: number;
+  // lastMinHeight: number;
 
   state: State = {
     isFixed: false,
@@ -173,8 +173,8 @@ class Sticky extends Component<RenderProps, State> {
       }
     }
 
-    const minHeight = this.state.isFixed && dontUpdateHolderHeightWhenSticky && this.lastMinHeight ? this.lastMinHeight : wrapperRect.height;
-    this.lastMinHeight = minHeight;
+    // const minHeight = this.state.isFixed && dontUpdateHolderHeightWhenSticky && this.lastMinHeight ? this.lastMinHeight : wrapperRect.height;
+    // this.lastMinHeight = minHeight;
 
     // To ensure that this component becomes sticky immediately on mobile devices instead
     // of disappearing until the scroll event completes, we add `transform: translateZ(0)`
@@ -188,7 +188,7 @@ class Sticky extends Component<RenderProps, State> {
     const newState: State = {
       isFixed,
       height: wrapperRect.height,
-      holderStyles: { minHeight: `${minHeight}px` },
+      holderStyles: { minHeight: `${wrapperRect.height}px` },
       wrapperStyles: isFixed ? {
         ...iosRenderingFixStyles,
         ...buildStickyStyle(mode, this.props, {
