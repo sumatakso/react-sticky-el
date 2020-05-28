@@ -1,6 +1,14 @@
 # lib
 es
+src
 .idea
+.storybook
+stories
+storybook-static
+test
+.babelrc
+.eslintrc
+
 # Logs
 logs
 *.log
