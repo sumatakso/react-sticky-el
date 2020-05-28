@@ -1,7 +1,7 @@
 // @flow strict
 
 import type { MaybeStyles, RenderProps } from "./types";
-import { Component, createContext } from "react";
+import React, { Component, createContext } from "react";
 import { listen, unlisten } from "./helpers/events";
 import find from "./helpers/find";
 import getClosestTransformedParent from "./helpers/getClosestTransformedParent";
@@ -196,7 +196,7 @@ class Sticky extends Component<RenderProps, State> {
           boundaryBottom: mode === 'top' ? boundaryRect.bottom : 0,
           top: mode === 'top' ? scrollRect.top - (offsets ? offsets.top : 0) : 0,
           bottom: mode === 'bottom' ? scrollRect.bottom - (offsets ? offsets.bottom : 0) : 0,
-          width: holderRect.width,StickyStateContext
+          width: holderRect.width,
           height: wrapperRect.height
         })
       } : iosRenderingFixStyles
