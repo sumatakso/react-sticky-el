@@ -1,7 +1,7 @@
 // @flow strict
 
 import type { MaybeStyles, RenderProps } from "./types";
-import { Component } from "react";
+import { Component, createContext } from "react";
 import { listen, unlisten } from "./helpers/events";
 import find from "./helpers/find";
 import getClosestTransformedParent from "./helpers/getClosestTransformedParent";
@@ -74,7 +74,7 @@ const isEqual = (obj1: State, obj2: State) => {
 
   return true;
 };
-
+export const StickyStateContext = createContext({isFixed:false});
 class Sticky extends Component<RenderProps, State> {
   static defaultProps = {
     mode: 'top',
@@ -150,7 +150,7 @@ class Sticky extends Component<RenderProps, State> {
     if (disabled) {
       if (this.state.isFixed) {
         this.setState({ isFixed: false })
-      }
+      }StickyStateContext
       return
     }
 
@@ -196,7 +196,7 @@ class Sticky extends Component<RenderProps, State> {
           boundaryBottom: mode === 'top' ? boundaryRect.bottom : 0,
           top: mode === 'top' ? scrollRect.top - (offsets ? offsets.top : 0) : 0,
           bottom: mode === 'bottom' ? scrollRect.bottom - (offsets ? offsets.bottom : 0) : 0,
-          width: holderRect.width,
+          width: holderRect.width,StickyStateContext
           height: wrapperRect.height
         })
       } : iosRenderingFixStyles
@@ -334,13 +334,15 @@ class Sticky extends Component<RenderProps, State> {
     const { holderRef, wrapperRef } = this;
     const { isFixed, wrapperStyles, holderStyles } = this.state;
 
-    return this.props.children({
-      holderRef,
-      wrapperRef,
-      isFixed,
-      wrapperStyles,
-      holderStyles
-    })
+    return <StickyStateContext.Provider value={{isFixed}}>
+    {this.props.children({
+        holderRef,
+        wrapperRef,
+        isFixed,
+        wrapperStyles,
+        holderStyles
+      })}
+    </StickyStateContext.Provider>
   }
 }
 
