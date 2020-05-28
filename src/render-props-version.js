@@ -75,6 +75,8 @@ const isEqual = (obj1: State, obj2: State) => {
   return true;
 };
 
+export const StickyStateContext = React.createContext({isFixed:false});
+
 class Sticky extends Component<RenderProps, State> {
   static defaultProps = {
     mode: 'top',
@@ -334,13 +336,15 @@ class Sticky extends Component<RenderProps, State> {
     const { holderRef, wrapperRef } = this;
     const { isFixed, wrapperStyles, holderStyles } = this.state;
 
-    return this.props.children({
-      holderRef,
-      wrapperRef,
-      isFixed,
-      wrapperStyles,
-      holderStyles
-    })
+    return <StickyStateContext.Provider value={{isFixed}}>
+      {this.props.children({
+        holderRef,
+        wrapperRef,
+        isFixed,
+        wrapperStyles,
+        holderStyles
+      })}
+    </StickyStateContext.Provider>
   }
 }
 
