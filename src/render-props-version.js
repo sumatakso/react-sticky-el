@@ -150,7 +150,7 @@ class Sticky extends Component<RenderProps, State> {
     if (disabled) {
       if (this.state.isFixed) {
         this.setState({ isFixed: false })
-      }StickyStateContext
+      }
       return
     }
 
@@ -334,8 +334,8 @@ class Sticky extends Component<RenderProps, State> {
     const { holderRef, wrapperRef } = this;
     const { isFixed, wrapperStyles, holderStyles } = this.state;
 
-    return <StickyStateContext.Provider value={{isFixed}}>
-    {this.props.children({
+    return <StickyStateContext.Provider>
+      {this.props.children({
         holderRef,
         wrapperRef,
         isFixed,
@@ -343,6 +343,7 @@ class Sticky extends Component<RenderProps, State> {
         holderStyles
       })}
     </StickyStateContext.Provider>
+    
   }
 }
 
